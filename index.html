@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animal Crossing - Download Guide</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="icon" href="src/icon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div class="content-container">
+        <h1>Animal Crossing in 5 Steps (hopefully)</h1>
+        <button class="button" id="downloadBtn"><i class="fas fa-download"></i> Download RyujinX</button>
+        <button class="button" id="toolsBtn"><i class="fas fa-tools"></i> Download RyujinX's Tools</button>
+        <button class="button" id="setupBtn"><i class="fas fa-cogs"></i> Setup RyujinX</button>
+        <button class="button" id="IDMBtn"><i class="fas fa-cloud-download-alt"></i> Download IDM</button>
+        <button class="button" id="gameBtn"><i class="fas fa-gamepad"></i> Download Animal Crossing</button>
+    </div>
+
+    <!-- Popup for RyujinX download -->
+    <div class="overlay" id="overlay"></div>
+    <div class="popup" id="popup">
+        <span class="close" id="closeBtn">&times;</span>
+        <div class="popup-content">
+            <h1>RyujinX</h1>
+            <iframe id="tutorialVideo" width="100%" height="470" style="display:none;" src="https://www.youtube.com/embed/DLDDEFGew4U" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <button class="button" id="takeMeThereBtn"><i class="fas fa-arrow-up"></i> Take Me There</button>
+        </div>
+    </div>
+
+        <!-- Popup for RyujinX Tools -->
+    <div class="overlay" id="toolsOverlay"></div>
+    <div class="popup" id="toolsPopup">
+        <span class="close" id="toolsCloseBtn">&times;</span>
+        <div class="popup-content">
+            <h1>RyujinX's Tools</h1>
+            <!-- Video container for tools -->
+            <div id="toolsVideoContainer">
+                <iframe id="toolsVideo" width="100%" height="470" style="display:none;" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+            <div class="button-container">
+                <button class="button" id="downloadFirmwareBtn"><i class="fas fa-cogs"></i> Download Firmware</button>
+                <button class="button" id="downloadProdKeysBtn"><i class="fas fa-key"></i> Download ProdKeys</button>
+            </div>
+            
+        </div>
+    </div>
+
+
+    <!-- Popup for RyujinX Setup -->
+    <div class="overlay" id="setupOverlay"></div>
+    <div class="popup" id="setupPopup">
+        <span class="close" id="setupCloseBtn">&times;</span>
+        <div class="popup-content">
+            <h1>RyujinX's Setup</h1>
+            <iframe id="setupVideo" width="100%" height="470" style="display:none;" src="https://www.youtube.com/embed/_xUh16ejo9s" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+    </div>
+
+    <!-- Popup for IDM download -->
+    <div class="overlay" id="IDMoverlay"></div>
+    <div class="popup" id="IDMPopup">
+        <span class="close" id="IDMCloseBtn">&times;</span>
+        <div class="popup-content">
+            <h1>Internet Download Manager</h1>
+            <p>Makes The Download Speed Way Faster</p>
+            <iframe id="IDMVideo" width="100%" height="470" style="display:none;" src="https://www.youtube.com/embed/fCrhDPW4qXQ" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <button class="button" id="IDMtakeMeThereBtn"><i class="fas fa-arrow-up"></i> Take Me There</button>
+        </div>
+    </div>
+
+    <!-- Popup for Game download -->
+    <div class="overlay" id="gameOverlay"></div>
+    <div class="popup" id="gamePopup">
+        <span class="close" id="gameCloseBtn">&times;</span>
+        <div class="popup-content">
+            <h1>Animal Crossing: New Horizon</h1>
+            <iframe id="gameVideo" src="https://player.vimeo.com/video/995082233?h=8ca3f45ad3" width="100%" height="470" frameborder="0"    allowfullscreen></iframe>
+            <button class="button" id="gametakeMeThereBtn"><i class="fas fa-arrow-up"></i> Take Me There</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
