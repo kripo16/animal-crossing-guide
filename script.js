@@ -26,7 +26,9 @@ document.addEventListener('DOMContentLoaded', () => {
         setupVideo: document.getElementById('setupVideo'),
         IDMVideo: document.getElementById('IDMVideo'),
         toolsFirmwareVideo: document.getElementById('toolsFirmwareVideo'),
-        toolsProdKeysVideo: document.getElementById('toolsProdKeysVideo')
+        toolsProdKeysVideo: document.getElementById('toolsProdKeysVideo'),
+        doneBtn: document.getElementById('doneBtn'),
+        memeVideo: document.getElementById('memeVideo')
     };
 
     const buttons = [
@@ -37,6 +39,8 @@ document.addEventListener('DOMContentLoaded', () => {
         elements.gameBtn
     ];
 
+    let isSetupPopupOpened = false;
+
     buttons.forEach((button, index) => {
         if (index > 0) button.classList.add('hidden');
     });
@@ -46,12 +50,26 @@ document.addEventListener('DOMContentLoaded', () => {
         popup.style.display = 'block';
         if (video) video.style.display = 'block';
         if (nextButton) nextButton.classList.remove('hidden');
+        if (elements.doneBtn.style.display === 'none') elements.doneBtn.style.display = 'block';
+        if (isSetupPopupOpened) {
+            elements.setupCloseBtn.style.display = 'none';
+        }
+        
     };
 
     const hidePopup = (popup, video) => {
         elements.overlay.style.display = 'none';
         popup.style.display = 'none';
         if (video) video.style.display = 'none';
+    };
+
+    const hideSetupPopup = (popup, video) => {
+        elements.overlay.style.display = 'none';
+        popup.style.display = 'none';
+        if (video) video.style.display = 'none';
+        elements.memeVideo.currentTime = 0;  // Reset the video to the beginning
+        elements.memeVideo.pause();         
+        elements.memeVideo.style.display = 'none';   
     };
 
     const setActiveButton = (button) => {
@@ -63,6 +81,25 @@ document.addEventListener('DOMContentLoaded', () => {
         setActiveButton(elements.downloadBtn);
     });
 
+    elements.doneBtn.addEventListener('click', () => {
+        elements.memeVideo.style.display = 'block';
+        elements.setupVideo.style.display = 'none';
+        elements.memeVideo.play();
+        elements.doneBtn.style.display = 'none';
+        if (elements.memeVideo.requestFullscreen) {
+            elements.memeVideo.requestFullscreen();
+        } else if (elements.memeVideo.mozRequestFullScreen) { // Firefox
+            elements.memeVideo.mozRequestFullScreen();
+        } else if (elements.memeVideo.webkitRequestFullscreen) { // Chrome, Safari, and Opera
+            elements.memeVideo.webkitRequestFullscreen();
+        } else if (elements.memeVideo.msRequestFullscreen) { // IE/Edge
+            elements.memeVideo.msRequestFullscreen();
+        }
+        
+        elements.memeVideo.play();
+        elements.setupCloseBtn.style.display = 'block';
+    });
+
     elements.toolsBtn.addEventListener('click', () => {
         elements.toolsOverlay.style.display = 'block';
         showPopup(elements.toolsPopup, elements.setupBtn);
@@ -70,6 +107,8 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     elements.setupBtn.addEventListener('click', () => {
+        isSetupPopupOpened = true;
+
         showPopup(elements.setupPopup, elements.IDMBtn, elements.setupVideo);
         setActiveButton(elements.setupBtn);
     });
@@ -86,22 +125,28 @@ document.addEventListener('DOMContentLoaded', () => {
 
     elements.closeBtn.addEventListener('click', () => hidePopup(elements.popup, elements.tutorialVideo));
     elements.IDMCloseBtn.addEventListener('click', () => hidePopup(elements.IDMPopup, elements.IDMVideo));
-    elements.setupCloseBtn.addEventListener('click', () => hidePopup(elements.setupPopup, elements.setupVideo));
+    elements.setupCloseBtn.addEventListener('click', () => {hideSetupPopup(elements.setupPopup, elements.setupVideo)});
     elements.gameCloseBtn.addEventListener('click', () => hidePopup(elements.gamePopup));
 
     elements.toolsCloseBtn.addEventListener('click', () => {
         hidePopup(elements.toolsPopup);
         elements.toolsOverlay.style.display = 'none';
     });
-
-    elements.overlay.addEventListener('click', () => {
+    function handleOverlayClick() {
         hidePopup(elements.popup, elements.tutorialVideo);
         hidePopup(elements.setupPopup, elements.setupVideo);
         hidePopup(elements.IDMPopup, elements.IDMVideo);
         hidePopup(elements.gamePopup);
         hidePopup(elements.toolsPopup);
         elements.toolsOverlay.style.display = 'none';
-    });
+        if (elements.memeVideo.style.display === 'block') {
+            elements.memeVideo.currentTime = 0;
+            elements.memeVideo.pause();
+            elements.memeVideo.style.display = 'none';
+        }
+    }
+    
+    elements.overlay.addEventListener('click', handleOverlayClick);
 
     elements.toolsOverlay.addEventListener('click', () => {
         hidePopup(elements.toolsPopup);
